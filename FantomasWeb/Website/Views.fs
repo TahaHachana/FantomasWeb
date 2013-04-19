@@ -12,7 +12,7 @@ module Views =
     let withMainTemplate = Skin.WithTemplate<Action> mainTemplate
 
     let home =
-        withMainTemplate "Online F# Code Formatter" "A Web-based FSharp code formatting tool. " <| fun ctx ->
+        withMainTemplate "Online F# Code Formatting Tool" "A Web-based FSharp code formatting tool. " <| fun ctx ->
             [
                 Div [Class "wrap"] -< [
                     Home.navigation

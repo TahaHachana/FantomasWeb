@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Utils.fs" />
     <Compile Include="ForkMe.fs" />
+    <Compile Include="Config.fs" />
     <Compile Include="Fantomas.fs" />
     <Compile Include="Content.fs" />
     <Compile Include="Model.fs" />
@@ -48,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Args">
-      <HintPath>..\..\packages\Fantomas.0.8.9\lib\Args.dll</HintPath>
+      <HintPath>..\..\packages\Fantomas.0.9.0\lib\Args.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ExtSharper">
@@ -56,11 +57,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Fantomas">
-      <HintPath>..\..\packages\Fantomas.0.8.9\lib\Fantomas.exe</HintPath>
+      <HintPath>..\..\packages\Fantomas.0.9.0\lib\Fantomas.exe</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FantomasLib">
-      <HintPath>..\..\packages\Fantomas.0.8.9\lib\FantomasLib.dll</HintPath>
+    <Reference Include="FantomasLib, Version=0.9.0.0, Culture=neutral, PublicKeyToken=null">
       <Private>True</Private>
     </Reference>
     <Reference Include="FSharp.Compiler, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

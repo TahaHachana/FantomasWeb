@@ -22,7 +22,7 @@ module Content =
 
     module Home =
 
-        let title = "F# Code Formatting Tool"
+        let title = "Online F# Code Formatting Tool"
 
         let metaDescription = "A Web-based FSharp code formatting tool."
 
@@ -30,7 +30,7 @@ module Content =
 
         let header : HtmlElement =
             header
-                "F# Code Formatter"
+                "F# Code Formatting"
                 "Paste your FSharp code and hit 'Format' to generate a properly formatted output."
 
     module About =
