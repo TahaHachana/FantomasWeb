@@ -50,6 +50,7 @@
     <Content Include="Images\Loader.gif" />
     <Content Include="Scripts\*.js" />
     <Content Include="Content\**\*.*" />
+    <Content Include="StyleSheets\bootstrap-combined.min.css" />
     <Content Include="StyleSheets\StyleSheet1.css" />
     <Content Include="Themes\**\*.*" />
     <Content Include="Views\**\*.*" />

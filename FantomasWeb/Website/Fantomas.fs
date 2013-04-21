@@ -24,7 +24,7 @@ module Fantomas =
             IndentOnTryWith= config.IndentOnTryWith
         }
 
-    type Result = Failure | Success of string
+    type Result = Failure | Success of string * string
 
     module private Server =
 
@@ -35,12 +35,12 @@ module Fantomas =
                     let fsi = config.ParseAsFsi
                     let config' = toFormatConfig config
                     let config = FormatConfig.Default
-//                    let code = CodeFormatter.tryFormatSourceString false "let add1 x = x + 1" config
                     let strOption = CodeFormatter.tryFormatSourceString fsi src config'
                     match strOption with
-                        | None -> return Failure
-                        | Some str -> return Success str
-//                    return strOption
+                        | None     -> return Failure
+                        | Some str ->
+                            let html = Highlight.highlight str
+                            return Success (str , html)
                 with _ -> return Failure
             }
 
@@ -77,10 +77,11 @@ module Fantomas =
                         let! result = Server.format textArea.Value config
                         match result with
                             | Failure      -> displayAlert false
-                            | Success code ->
+                            | Success (code, html) ->
                                 textArea'.Value <- code
+                                JQuery.Of("#html-textarea").Text(html).Ignore
+                                JQuery.Of("#html-preview").Html(html).Ignore
                                 displayAlert true
-//                        JavaScript.Log config
                         loaderJq.Css("visibility", "hidden").Ignore
                         elt.RemoveAttribute("disabled")
                     } |> Async.Start)
@@ -102,8 +103,8 @@ module Fantomas =
                         ]
                         Div [Attr.Class "tab-content"] -< [
                             Div [Attr.Class "tab-pane active"; Id "output"] -< [textArea']
-                            Div [Attr.Class "tab-pane"; Id "html"] -< [Text "Coming soon ..."]
-                            Div [Attr.Class "tab-pane"; Id "html-preview"] -< [Text "Coming soon ..."]
+                            Div [Attr.Class "tab-pane"; Id "html"] -- TextArea [Id "html-textarea"; Attr.Style "overflow: scroll; word-wrap: normal; height: 300px;"; Attr.Class "span12"]
+                            Div [Attr.Class "tab-pane"; Id "html-preview"]
                         ]
                     ]
                 ]

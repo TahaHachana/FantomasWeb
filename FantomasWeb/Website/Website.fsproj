@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Utils.fs" />
     <Compile Include="ForkMe.fs" />
+    <Compile Include="Highlight.fs" />
     <Compile Include="Config.fs" />
     <Compile Include="Fantomas.fs" />
     <Compile Include="Content.fs" />
