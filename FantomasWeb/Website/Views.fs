@@ -19,13 +19,14 @@ module Views =
                     Div [new ForkMe.Control()]
                     Div [Class "container"; Id "push"] -< [
                         Home.header
+                        Div [Class "pull-right"; Style "height: 30px;"] -< [new AddThis.Control()]
                         Div [Id "alert"; Style "position: fixed; top: 40px; display: none;"; Class "offset4 span4 alert text-center"]
                         Div [new Config.Control()]
                         H3 [Text "F# Code"]
                         TextArea [Id "code-textarea"; Style "overflow: scroll; word-wrap: normal; height: 300px;"; Class "span12"]
-                        Div [Style "padding: 25px; padding-left: 0px"] -< [
+                        Div [Style "padding: 10px 0px 10px 0px; padding-left: 0px"] -< [
                             Div [new Fantomas.Control()]
-                            Div [Img [Style "visibility: hidden; margin: 5px 0px 0px 10px;"; Src "Images/Loader.gif"; Id "loader"]]
+                            Div [Img [Style "padding-top: 10px; visibility: hidden;"; Src "Images/Loader.gif"; Id "loader"]]
                         ]
                         Div [Style "height: 500px;"] -< [
                             Div [Class "tabbable"] -< [

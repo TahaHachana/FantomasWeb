@@ -56,28 +56,42 @@ module Fantomas =
             ajq.FadeIn().Ignore
             ajq.FadeOut(5000.).Ignore
 
-        let main() =
-            Button [Attr.Class "btn btn-primary btn-large"; Attr.Style "float: left;"] -- Text "Format"
+        let highlightBtn() =
+            Button [Attr.Class "btn btn-primary btn-large"] -- Text "Format"
             |>! OnClick (fun elt _ ->
                 async {
                     elt.SetAttribute("disabled", "disabled")
                     let loaderJq = JQuery.Of("#loader")
-                    let formattedJq = JQuery.Of("#formatted-textarea")
                     loaderJq.Css("visibility", "visible").Ignore
+                    let formattedJq = JQuery.Of("#formatted-textarea")
+                    let htmlJq = JQuery.Of("#html-textarea")
+                    let previewJq = JQuery.Of("#html-preview")
+                    formattedJq.Val("").Ignore
+                    htmlJq.Val("").Ignore
+                    previewJq.Html("").Ignore         
                     let config = getConfig()
-                    formattedJq.Text("").Ignore
                     let code = JQuery.Of("#code-textarea").Val() |> string
                     let! result = Server.format code config
+                    loaderJq.Css("visibility", "hidden").Ignore
                     match result with
                         | Failure      -> displayAlert false
                         | Success (code, html) ->
-                            formattedJq.Text(code).Ignore
-                            JQuery.Of("#html-textarea").Text(html).Ignore
-                            JQuery.Of("#html-preview").Html(html).Ignore
+                            formattedJq.Val(code).Ignore
+                            htmlJq.Val(html).Click(fun _ _ -> htmlJq.Select().Ignore).Ignore
+                            previewJq.Html(html).Ignore
                             displayAlert true
-                    loaderJq.Css("visibility", "hidden").Ignore
                     elt.RemoveAttribute("disabled")
                 } |> Async.Start)
+
+        let clearBtn() =
+            Button [Attr.Class "btn btn-large"; Attr.Style "margin-left: 10px;"] -- Text "Clear"
+            |>! OnClick (fun _ _ -> JQuery.Of("#code-textarea").Val("").Ignore)
+
+        let main() =
+            Div [
+                highlightBtn()
+                clearBtn()
+            ]
 
     type Control() =
         
