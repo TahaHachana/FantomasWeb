@@ -31,7 +31,7 @@ module Content =
         let header : HtmlElement =
             header
                 "F# Code Formatting"
-                "Paste your FSharp code and hit 'Format' to generate a properly formatted output."
+                "Paste your FSharp code and press 'Format' to generate a properly formatted output."
 
     module About =
     

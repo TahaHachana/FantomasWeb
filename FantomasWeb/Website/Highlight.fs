@@ -1,7 +1,9 @@
 ﻿namespace Website
 
+open IntelliFactory.WebSharper
+
 module Highlight =
-    
+   
     open System
     open System.Text.RegularExpressions
 
@@ -11,12 +13,12 @@ module Highlight =
         | Keyword   of string
         | Comment   of string
         | MLComment of string
-        
-    let commentRegex = Regex("//(.+)?", RegexOptions.Compiled)
+
+    let commentRegex   = Regex("///?(.+)?", RegexOptions.Compiled)
     let mlCommentRegex = Regex("(?s)\(\*.+?\*\)", RegexOptions.Compiled)
-    let keywordRegex = Regex("(\ ?( abstract )\ |\ ?( and )\ |\ ?( as )\ |\ ?( assert )\ |\ ?( base )\ |\ ?( begin )\ |\ ?( class )\ |\ ?( default )\ |\ ?( delegate )\ |\ ?( do )\ |\ ?( done )\ |\ ?( downcast )\ |\ ?( downto )\ |\ ?( elif )\ |\ ?( else )\ |\ ?( end )\ |\ ?( exception )\ |\ ?( extern )\ |\ ?( false )\ |\ ?( finally )\ |\ ?( for )\ |\ ?( fun )\ |\ ?( function )\ |\ ?( global)\ |\ ?(if)\ |\ ?(in)\ |\ ?(inherit)\ |\ ?(inline)\ |\ ?(interface)\ |\ ?(internal)\ |\ ?(lazy)\ |\ ?(let)\ |\ ?(let!)\ |\ ?(match)\ |\ ?(member)\ |\ ?(module)\ |\ ?(mutable)\ |\ ?(namespace)\ |\ ?(new)\ |\ ?(not)\ |\ ?(null)\ |\ ?(of)\ |\ ?(open)\ |\ ?(or)\ |\ ?(override)\ |\ ?(private)\ |\ ?(public)\ |\ ?(rec)\ |\ ?(return)\ |\ ?(return!)\ |\ ?(select)\ |\ ?(static)\ |\ ?(struct)\ |\ ?(then)\ |\ ?(to)\ |\ ?(true)\ |\ ?(try)\ |\ ?(type)\ |\ ?(upcast)\ |\ ?(use)\ |\ ?(use!)\ |\ ?(val)\ |\ ?(void)\ |\ ?(when)\ |\ ?(while)\ |\ ?(with)\ |\ ?(yield)\ |\ ?(yield!)\ )",RegexOptions.Compiled)
-    let stringRegex = Regex("(?s)(\"[^\"]+?\"|\"{3}.+?\"{3})", RegexOptions.Compiled)
-    
+    let keywordRegex   = Regex("(#else|#endif|#help|#I|#if|#light|#load|#quit|#r|#time|abstract|and|as|assert|base|begin|class|default|delegate|do|done|downcast|downto|elif|else|end|exception|extern|false|finally|for|fun|function|global|if|in|inherit|inline|interface|internal|lazy|let|let!|match|member|module|mutable|namespace|new|not|null|of|open|or|override|private|public|rec|return|return!|select|static|struct|then|to|true|try|type|upcast|use|use!|val|void|when|while|with|yield|yield!)(\ |\n|$)",RegexOptions.Compiled)
+    let stringRegex    = Regex("(?s)(\"[^\"\\\]*(?:\\\.[^\"\\\]*)*\"|\"{3}[^\"\\\]\*(?:\\\.[^\"\\\]*)*\"{3})", RegexOptions.Compiled)
+
     let (|ParseRegex|_|) (regex : Regex) str =
         let m = regex.Match str
         match m.Success && m.Index = 0 with
@@ -56,10 +58,9 @@ module Highlight =
         | _                            -> tokenize str.[1 ..] <| (Else <| str.Substring(0, 1)) :: acc
 
     let lineNums (str : String) =
-        let str' = Regex("\n$").Replace(str, "")
-        let count = str'.Split '\n' |> fun x -> x.Length
+        let count = str.Split '\n' |> fun x -> x.Length
         let spans = [for x in 1 .. count -> "<span>" + string x + "</span>"] |> String.concat "<br />"
-        "<div style='margin: 0px; padding: 0px; border: 1px solid lightgray; font-family: Consolas; background-color: #f8f8ff;'><table><tr><td style='padding: 5px; background-color: lightgray;'>" + spans + "</td><td style='vertical-align: top;'>" + str' + "</td></tr></table></div>"
+        "<div style='margin: 0px; padding: 0px; border: 1px solid #ececec; font-family: Consolas; background-color: #f8f8ff; width: auto; overflow: auto;'><table><tr><td style='padding: 5px; background-color: #ececec;'>" + spans + "</td><td style='vertical-align: top;'>" + str + "</td></tr></table><div style='font-weight: bold; padding: 10px;'>Created with <a href='http://fantomasweb.apphb.com/' target='_blank'>FantomasWeb</a></div></div>"
 
     let serialize (tokens : Token list) =
         List.foldBack (fun token str ->
@@ -73,4 +74,12 @@ module Highlight =
         |> fun x -> "<pre style='padding: 5px; margin: 0px;'>" + x + "</pre>"
         |> lineNums
 
-    let highlight str = tokenize str [] |> serialize
+    let replaceLtGtAmp str =
+        Regex("&").Replace(str, "&amp;")
+        |> fun x -> Regex("<").Replace(x, "&lt;")
+        |> fun x -> Regex(">").Replace(x, "&gt;")
+            
+    let highlight str =
+        replaceLtGtAmp str
+        |> fun x -> tokenize x []
+        |> serialize

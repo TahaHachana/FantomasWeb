@@ -60,6 +60,9 @@
     <Content Include="*.html" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FantomasLib">
+      <HintPath>..\..\packages\Fantomas.0.9.0\lib\FantomasLib.dll</HintPath>
+    </Reference>
     <Reference Include="FSharp.Compiler, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Fantomas.0.9.0\lib\FSharp.Compiler.dll</HintPath>

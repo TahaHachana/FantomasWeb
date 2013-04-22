@@ -49,20 +49,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Args">
-      <HintPath>..\..\packages\Fantomas.0.9.0\lib\Args.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ExtSharper">
       <HintPath>..\..\packages\ExtSharper.0.1.13\lib\Net40\ExtSharper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fantomas">
-      <HintPath>..\..\packages\Fantomas.0.9.0\lib\Fantomas.exe</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FantomasLib, Version=0.9.0.0, Culture=neutral, PublicKeyToken=null">
-      <Private>True</Private>
+    <Reference Include="FantomasLib">
+      <HintPath>..\..\packages\Fantomas.0.9.0\lib\FantomasLib.dll</HintPath>
     </Reference>
     <Reference Include="FSharp.Compiler, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>

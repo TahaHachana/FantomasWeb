@@ -1,9 +1,5 @@
 ﻿namespace Website
 
-#if INTERACTIVE
-#r """C:\Users\AHMED\Documents\GitHub\FantomasWeb\packages\Fantomas.0.9.0\lib\FantomasLib.dll"""
-#endif
-
 open IntelliFactory.WebSharper
 open Fantomas
 open Fantomas.FormatConfig
@@ -60,55 +56,28 @@ module Fantomas =
             ajq.FadeIn().Ignore
             ajq.FadeOut(5000.).Ignore
 
-        let alert = Div [Id "alert"; Attr.Style "position: fixed; top: 40px; display: none;"; Attr.Class "offset4 span4 alert text-center"]
-
         let main() =
-            let textArea = TextArea [Attr.Style "overflow: scroll; word-wrap: normal; height: 300px;"; Attr.Class "span12"]
-            let textArea' = TextArea [Attr.Style "overflow: scroll; word-wrap: normal; height: 300px;"; Attr.Class "span12"]
-            let formatBtn =
-                Button [Attr.Class "btn btn-primary btn-large"; Attr.Style "float: left;"] -- Text "Format"
-                |>! OnClick (fun elt _ ->
-                    async {
-                        elt.SetAttribute("disabled", "disabled")
-                        let loaderJq = JQuery.Of("#loader")
-                        loaderJq.Css("visibility", "visible").Ignore
-                        let config = getConfig()
-                        textArea'.Value <- ""
-                        let! result = Server.format textArea.Value config
-                        match result with
-                            | Failure      -> displayAlert false
-                            | Success (code, html) ->
-                                textArea'.Value <- code
-                                JQuery.Of("#html-textarea").Text(html).Ignore
-                                JQuery.Of("#html-preview").Html(html).Ignore
-                                displayAlert true
-                        loaderJq.Css("visibility", "hidden").Ignore
-                        elt.RemoveAttribute("disabled")
-                    } |> Async.Start)
-            Div [
-                alert
-                Client.main()
-                H3 [Text "F# Code"]
-                textArea
-                Div [Attr.Style "padding: 10px;"] -< [
-                    formatBtn
-                    Div [Img [Attr.Style "padding: 10px; visibility: hidden;"; Src "Images/Loader.gif"; Id "loader"]]
-                ]
-                Div [Attr.Style "height: 500px;"] -< [
-                    Div [Attr.Class "tabbable"] -< [
-                        UL [Attr.Class "nav nav-tabs"] -< [
-                            LI [Attr.Class "active"] -< [A [HRef "#output"; HTML5.Attr.Data "toggle" "tab"] -< [Text "Output"]]
-                            LI [A [HRef "#html"; HTML5.Attr.Data "toggle" "tab"] -< [Text "HTML"]]
-                            LI [A [HRef "#html-preview"; HTML5.Attr.Data "toggle" "tab"] -< [Text "HTML Preview"]]
-                        ]
-                        Div [Attr.Class "tab-content"] -< [
-                            Div [Attr.Class "tab-pane active"; Id "output"] -< [textArea']
-                            Div [Attr.Class "tab-pane"; Id "html"] -- TextArea [Id "html-textarea"; Attr.Style "overflow: scroll; word-wrap: normal; height: 300px;"; Attr.Class "span12"]
-                            Div [Attr.Class "tab-pane"; Id "html-preview"]
-                        ]
-                    ]
-                ]
-            ]
+            Button [Attr.Class "btn btn-primary btn-large"; Attr.Style "float: left;"] -- Text "Format"
+            |>! OnClick (fun elt _ ->
+                async {
+                    elt.SetAttribute("disabled", "disabled")
+                    let loaderJq = JQuery.Of("#loader")
+                    let formattedJq = JQuery.Of("#formatted-textarea")
+                    loaderJq.Css("visibility", "visible").Ignore
+                    let config = getConfig()
+                    formattedJq.Text("").Ignore
+                    let code = JQuery.Of("#code-textarea").Val() |> string
+                    let! result = Server.format code config
+                    match result with
+                        | Failure      -> displayAlert false
+                        | Success (code, html) ->
+                            formattedJq.Text(code).Ignore
+                            JQuery.Of("#html-textarea").Text(html).Ignore
+                            JQuery.Of("#html-preview").Html(html).Ignore
+                            displayAlert true
+                    loaderJq.Css("visibility", "hidden").Ignore
+                    elt.RemoveAttribute("disabled")
+                } |> Async.Start)
 
     type Control() =
         

@@ -88,9 +88,9 @@ module Config =
                 ParseAsFsi = parseAsFsi.HasAttribute("checked")
             }
 
-//    type Control() =
-//
-//        inherit Web.Control()
-//
-//        [<JavaScript>]
-//        override __.Body = Client.main() :> _
+    type Control() =
+
+        inherit Web.Control()
+
+        [<JavaScript>]
+        override __.Body = Client.main() :> _
