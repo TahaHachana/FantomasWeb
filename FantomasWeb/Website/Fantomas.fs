@@ -20,7 +20,7 @@ module Fantomas =
             IndentOnTryWith= config.IndentOnTryWith
         }
 
-    type Result = Failure | Success of string * string
+    type Result = Error | Success of string * string
 
     module private Server =
 
@@ -33,11 +33,11 @@ module Fantomas =
                     let config = FormatConfig.Default
                     let strOption = CodeFormatter.tryFormatSourceString fsi src config'
                     match strOption with
-                        | None     -> return Failure
+                        | None     -> return Error
                         | Some str ->
                             let html = Highlight.highlight str
                             return Success (str , html)
-                with _ -> return Failure
+                with _ -> return Error
             }
 
     [<JavaScript>]
@@ -45,7 +45,6 @@ module Fantomas =
         
         open IntelliFactory.WebSharper.Html
         open IntelliFactory.WebSharper.JQuery
-        open IntelliFactory.WebSharper.Formlet
 
         let displayAlert success =
             let ajq = JQuery.Of("#alert")
@@ -74,7 +73,7 @@ module Fantomas =
                     let! result = Server.format code config
                     loaderJq.Css("visibility", "hidden").Ignore
                     match result with
-                        | Failure      -> displayAlert false
+                        | Error -> displayAlert false
                         | Success (code, html) ->
                             formattedJq.Val(code).Ignore
                             htmlJq.Val(html).Click(fun _ _ -> htmlJq.Select().Ignore).Ignore
