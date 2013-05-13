@@ -64,7 +64,7 @@ module Highlight =
     let lineNums (str : String) =
         let count = str.Split '\n' |> fun x -> x.Length
         let spans = [for x in 1 .. count -> "<span>" + string x + "</span>"] |> String.concat "<br />"
-        "<div style='margin: 0px; padding: 0px; border: 1px solid #ececec; font-family: Consolas; background-color: #f5f5f5; width: auto; overflow: auto;'><style type='text/css'>.fs-str {color: #d14;} .fs-key {color: blue;} .fs-com {color: green; font-style: italic;}</style><table><tr><td style='padding: 5px; vertical-align: top; background-color: #ececec; color: rgb(160, 160, 160);'>" + spans + "</td><td style='vertical-align: top; padding: 5px;'>" + str + "</td></tr></table><div style='font-weight: bold; padding: 10px;'>Created with <a href='http://fslight.apphb.com/' target='_blank'>FSLight</a></div></div>"
+        "<div style='margin: 0px; padding: 0px; border: 1px solid #ececec; font-family: Consolas; background-color: #f5f5f5; width: auto; overflow: auto;'><style type='text/css'>.fs-str {color: #d14;} .fs-key {color: blue;} .fs-com {color: green; font-style: italic;}</style><table><tr><td style='padding: 5px; vertical-align: top; background-color: #ececec; color: rgb(160, 160, 160);'>" + spans + "</td><td style='vertical-align: top; padding: 5px;'>" + str + "</td></tr></table><div style='font-weight: bold; padding: 10px;'>Created with <a href='http://fantomasweb.apphb.com/' target='_blank'>FantomasWeb</a></div></div>"
 
     let serialize (tokens : Token list) =
         List.foldBack (fun token str ->

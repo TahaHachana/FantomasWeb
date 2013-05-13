@@ -58,27 +58,31 @@
     <Content Include="Views\**\*.*" />
     <Content Include="*.asax" />
     <Compile Include="*.asax.cs" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="*.html" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Args">
-      <HintPath>..\..\packages\Fantomas.0.9.2\lib\Args.dll</HintPath>
-    </Reference>
-    <Reference Include="Fantomas">
-      <HintPath>..\..\packages\Fantomas.0.9.2\lib\Fantomas.exe</HintPath>
-    </Reference>
-    <Reference Include="FantomasLib, Version=0.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Args, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Fantomas.0.9.2\lib\FantomasLib.dll</HintPath>
+      <HintPath>..\..\packages\Fantomas.0.9.3\lib\Args.dll</HintPath>
+    </Reference>
+    <Reference Include="Fantomas, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Fantomas.0.9.3\lib\Fantomas.exe</HintPath>
+    </Reference>
+    <Reference Include="FantomasLib, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Fantomas.0.9.3\lib\FantomasLib.dll</HintPath>
     </Reference>
     <Reference Include="FSharp.Compiler, Version=4.3.0.0, Culture=neutral, PublicKeyToken=f536804aa0eb945b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Fantomas.0.9.2\lib\FSharp.Compiler.dll</HintPath>
+      <HintPath>..\..\packages\Fantomas.0.9.3\lib\FSharp.Compiler.dll</HintPath>
     </Reference>
     <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\..\packages\Fantomas.0.9.2\lib\FSharp.Core.dll</HintPath>
+      <HintPath>..\..\packages\Fantomas.0.9.3\lib\FSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />

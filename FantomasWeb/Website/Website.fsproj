@@ -57,8 +57,7 @@
       <HintPath>..\..\packages\ExtSharper.0.1.13\lib\Net40\ExtSharper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fantomas">
-      <HintPath>..\..\packages\Fantomas.0.9.2\lib\Fantomas.exe</HintPath>
+    <Reference Include="Fantomas, Version=0.9.2.0, Culture=neutral, PublicKeyToken=null">
       <Private>True</Private>
     </Reference>
     <Reference Include="FantomasLib, Version=0.9.0.0, Culture=neutral, PublicKeyToken=null">
