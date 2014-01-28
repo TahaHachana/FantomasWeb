@@ -1,0 +1,88 @@
+﻿#forkme {
+    position: fixed;
+    right: 0px;
+    border: 0;
+    z-index: 1200;
+}
+
+#config {
+    position: fixed;
+    top: 55px;
+    right: 200px;
+    background-color: white;
+    border: 1px solid;
+}
+
+#config-text {
+    font-weight: bold;
+    background-color: #0044cc;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#config-form {
+    display: none;
+    margin: 10px;
+    width: 300px;
+}
+
+#alert {
+position: fixed; top: 50px; display: none;
+}
+
+#loader {
+padding-top: 10px; visibility: hidden;
+}
+
+.code-textarea {
+overflow: scroll; word-wrap: normal; height: 300px; width: 100%; border: 1px solid lightgray;
+}
+
+#html-preview {
+    height: 300px;
+    overflow: scroll;
+}
+
+#tabs {
+    height: 500px;
+}
+
+footer div {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+/* See http://twitter.github.com/bootstrap/examples/sticky-footer-navbar.html */
+
+html, body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -60px;
+}
+
+#push {
+    padding-top: 70px;
+}
+
+#footer {
+    height: 60px;
+}
+
+#footer {
+    background-color: #f5f5f5;
+}
+
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

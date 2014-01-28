@@ -1,10 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Website", "FantomasWeb\Website\Website.fsproj", "{C1071F47-9B64-49A4-BB2B-D0891062B3E3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "FantomasWeb\Web\Web.csproj", "{03F1C00D-F3E6-4C3D-B519-803B40F08B33}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{29EDAD19-FEC1-4ACB-BAD9-EBCE4F1E3FC5}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -12,20 +8,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{29EDAD
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteletHost", "SiteletHost\SiteletHost.csproj", "{6826F595-C5DC-475B-A71C-138D10712453}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Sitelet", "Sitelet\Sitelet.fsproj", "{07CC62C3-2A57-4D60-A7EC-C322F69AB0E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C1071F47-9B64-49A4-BB2B-D0891062B3E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1071F47-9B64-49A4-BB2B-D0891062B3E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1071F47-9B64-49A4-BB2B-D0891062B3E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1071F47-9B64-49A4-BB2B-D0891062B3E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03F1C00D-F3E6-4C3D-B519-803B40F08B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03F1C00D-F3E6-4C3D-B519-803B40F08B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03F1C00D-F3E6-4C3D-B519-803B40F08B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03F1C00D-F3E6-4C3D-B519-803B40F08B33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6826F595-C5DC-475B-A71C-138D10712453}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{6826F595-C5DC-475B-A71C-138D10712453}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{6826F595-C5DC-475B-A71C-138D10712453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6826F595-C5DC-475B-A71C-138D10712453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07CC62C3-2A57-4D60-A7EC-C322F69AB0E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07CC62C3-2A57-4D60-A7EC-C322F69AB0E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07CC62C3-2A57-4D60-A7EC-C322F69AB0E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07CC62C3-2A57-4D60-A7EC-C322F69AB0E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
