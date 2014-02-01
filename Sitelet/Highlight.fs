@@ -14,12 +14,8 @@ type Token =
 let compileRegex pattern = Regex(pattern, RegexOptions.Compiled)
 let commentRegex = compileRegex "^///?(.+)?"
 let mlCommentRegex = compileRegex "(?s)^\(\*.+?\*\)"
-let keywordRegex = 
-    compileRegex 
-        "^(#else|#endif|#help|#I|#if|#light|#load|#quit|#r|#time|abstract|and|as|assert|base|begin|class|default|delegate|do|done|downcast|downto|elif|else|end|exception|extern|false|finally|for|fun|function|global|if|in|inherit|inline|interface|internal|lazy|let|let!|match|member|module|mutable|namespace|new|not|null|of|open|or|override|private|public|rec|return|return!|select|static|struct|then|to|true|try|type|upcast|use|use!|val|void|when|while|with|yield|yield!)(\ |\n|$)"
-let stringRegex = 
-    compileRegex 
-        "(?s)^(\"[^\"\\\]*(?:\\\.[^\"\\\]*)*\"|\"{3}[^\"\\\]\*(?:\\\.[^\"\\\]*)*\"{3})"
+let keywordRegex = compileRegex "^(#else|#endif|#help|#I|#if|#light|#load|#quit|#r|#time|abstract|and|as|assert|base|begin|class|default|delegate|do|done|downcast|downto|elif|else|end|exception|extern|false|finally|for|fun|function|global|if|in|inherit|inline|interface|internal|lazy|let|let!|match|member|module|mutable|namespace|new|not|null|of|open|or|override|private|public|rec|return|return!|select|static|struct|then|to|true|try|type|upcast|use|use!|val|void|when|while|with|yield|yield!)(\ |\n|$)"
+let stringRegex = compileRegex "(?s)^(\"[^\"\\\]*(?:\\\.[^\"\\\]*)*\"|\"{3}[^\"\\\]\*(?:\\\.[^\"\\\]*)*\"{3})"
 let elseRegex = compileRegex "^\w+(\ |\n|$)"
 
 let (|ParseRegex|_|) (regex : Regex) str = 
@@ -68,9 +64,9 @@ let lineNums(str : String) =
     let spans = 
         [for x in 1..count -> "<span>" + string x + "</span>"]
         |> String.concat "<br />"
-    "<div style='margin: 0px; padding: 0px; border: 1px solid #ececec; font-family: Consolas; background-color: #f5f5f5; width: auto; overflow: auto;'><style type='text/css'>.fs-str {color: #d14;} .fs-key {color: blue;} .fs-com {color: green; font-style: italic;}</style><table><tr><td style='padding: 5px; vertical-align: top; background-color: #ececec; color: rgb(160, 160, 160);'>" 
-    + spans + "</td><td style='vertical-align: top; padding: 5px;'>" + str 
-    + "</td></tr></table><div style='font-weight: bold; padding: 10px;'>Created with <a href='http://fantomasweb.apphb.com/' target='_blank'>FantomasWeb</a></div></div>"
+    "<div style='margin: 0px; padding: 0px; border: 1px solid #ececec; font-family: Monaco, Menlo, Consolas, monospace;'><style type='text/css'>.fs-str {color: #d14;} .fs-key {color: blue;} .fs-com {color: green; font-style: italic;}</style><table><tr><td style='padding: 5px; vertical-align: top; background-color: #ececec; color: rgb(160, 160, 160); font-size: 15px;'>" 
+    + spans + "</td><td style='font-size: 15px; vertical-align: top; padding: 5px;'>" + str 
+    + "</td></tr></table><div style='font-weight: bold; padding: 10px;'>Created with <a href='http://fslight.apphb.com/' target='_blank'>FsLight</a></div></div>"
 
 let serialize(tokens : Token list) = 
     List.foldBack (fun token str -> 
@@ -82,7 +78,7 @@ let serialize(tokens : Token list) =
             | Else x -> x
         str + token') tokens ""
     |> fun x -> 
-        "<pre style='margin: 0px; border: none; padding: 0; font-size: inherit;'>" 
+        "<pre style='margin: 0px; border: none; padding: 0; white-space: pre; font-size: 15px; background-color: white; font-family: Monaco, Menlo, Consolas, monospace;'>" 
         + x + "</pre>"
     |> lineNums
 
